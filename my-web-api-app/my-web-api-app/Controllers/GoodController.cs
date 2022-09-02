@@ -22,6 +22,7 @@ namespace my_web_api_app.Controllers
         {
             try
             {
+                //Test
                 //LINQ [Object] Query
                 var good = goods.SingleOrDefault(good => good.GoodCode == System.Guid.Parse(id));
                 if (good == null)
