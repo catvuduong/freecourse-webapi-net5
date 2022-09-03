@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using my_web_api_app.Data;
 
 namespace my_web_api_app
 {
@@ -28,6 +30,12 @@ namespace my_web_api_app
         {
 
             services.AddControllers();
+
+            services.AddDbContext<MyDbContext>(option =>
+            {
+                option.UseSqlServer(Configuration.GetConnectionString("MyDB"));
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "my_web_api_app", Version = "v1" });
