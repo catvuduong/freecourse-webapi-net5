@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using my_web_api_app.Data;
+using my_web_api_app.Services;
 
 namespace my_web_api_app
 {
@@ -35,6 +36,10 @@ namespace my_web_api_app
             {
                 option.UseSqlServer(Configuration.GetConnectionString("MyDB"));
             });
+
+            //services.AddScoped<ITypeRepository, TypeRepository>();
+            services.AddScoped<ITypeRepository, TypeRepositoryInMemory>();
+
 
             services.AddSwaggerGen(c =>
             {
